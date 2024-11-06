@@ -6,5 +6,9 @@
 /// um entsprechend Angebote unterscheiden zu können.
 /// </summary>
 public abstract class Angebot {
-    public int Id { get; set; }
+    
+    // Um die IDs nicht selber händisch zu pflegen, habe ich mich entschieden GUIDs zu verwenden
+    // und deren HashCode als ID abzuspeichern. Da die Anforderung war, die ID als Integer anzulegen,
+    // habe ich hier von abgesehen direkt eine GUID als string zu speichern.
+    public int Id { get; } = Math.Abs(Guid.NewGuid().GetHashCode());
 }
