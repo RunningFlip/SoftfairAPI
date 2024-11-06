@@ -111,4 +111,37 @@ public class VersicherungsRequestController : RequestController<Versicherungsang
             return this.Conflict(e.Message);
         }
     }
+    
+    //--------------------------------------------------------------------------------
+    // Alternativer Ansatz
+    //--------------------------------------------------------------------------------
+    
+    /// <summary>
+    /// Um das Problem zu umgehen, dass nun in GetAngebot ausschließlich auf der gesamten VersicherungsAngebot-
+    /// Liste iteriert wird, könnte man überlegen, ob es nicht sinnvoll wäre, einen spezifischen Typ mit zu übergeben.
+    /// Dadurch könnte man auf ein Set eines VersicherungsTyps das beste Angebot finden.
+    ///
+    /// Hier muss ich zugeben, dass ich das von vornherein genau so hätte bauen können, müsste dann aber auf die Vererbung verzichten.
+    /// Ich weiß, dass das einfacher gewesen wäre; ich wollte an dieser Stelle aber schlicht meinen Umgang mit Vererbung und
+    /// generischer Typisierung demonstrieren.
+    /// </summary>
+    /// <param name="typ"></param>
+    /// <returns></returns>
+    [HttpGet("{vergleiche}")]
+    public ActionResult<Versicherungsangebot> GetAngebot(VersicherungsTyp typ) {
+        
+        Versicherungsangebot[] allAngebote = this.management.GetAllAngeboteOfType<Versicherungsangebot>();
+        allAngebote = allAngebote.Where(candidate => candidate.VersicherungsTyp == typ).ToArray();
+        
+        KostenNutzenVergleichsrechner vergleichsrechner = new KostenNutzenVergleichsrechner();
+
+        try {
+
+            Versicherungsangebot? result = vergleichsrechner.VergleicheAngebote(allAngebote.ToList());
+            return result == null ? this.NoContent() : this.Ok(result);
+        }
+        catch (Exception e) {
+            return this.Conflict(e.Message);
+        }
+    }
 }
