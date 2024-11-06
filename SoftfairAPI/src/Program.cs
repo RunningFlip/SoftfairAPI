@@ -16,13 +16,17 @@ public static class Progam {
 
         Versicherungsangebot angebotA = new Versicherungsangebot() { Anbieter="Hook", VersicherungsTyp= VersicherungsTyp.Haftpflicht, MonatlichePraemie=30.99m, Deckungssumme=200000 };
         Versicherungsangebot angebotB = new Versicherungsangebot() { Anbieter="Allianz", VersicherungsTyp=VersicherungsTyp.KFZ, MonatlichePraemie=27.99m, Deckungssumme=100000 };
-        Versicherungsangebot angebotC = new Versicherungsangebot() { Anbieter="DVB", VersicherungsTyp=VersicherungsTyp.Hausrat, MonatlichePraemie=10.0m, Deckungssumme=100700 };
-        Versicherungsangebot angebotD = new Versicherungsangebot() { Anbieter="Wüstenrot", VersicherungsTyp=VersicherungsTyp.Haftpflicht, MonatlichePraemie=99.0m, Deckungssumme=500000 };
+        Versicherungsangebot angebotC = new Versicherungsangebot() { Anbieter="Wüstenrot", VersicherungsTyp=VersicherungsTyp.KFZ, MonatlichePraemie=99.0m, Deckungssumme=500000 };
+        Versicherungsangebot angebotD = new Versicherungsangebot() { Anbieter="DVB", VersicherungsTyp=VersicherungsTyp.Hausrat, MonatlichePraemie=10.0m, Deckungssumme=100700 };
+        Versicherungsangebot angebotE = new Versicherungsangebot() { Anbieter="Allianz", VersicherungsTyp=VersicherungsTyp.Hausrat, MonatlichePraemie=15.0m, Deckungssumme=101100 };
+        Versicherungsangebot angebotF = new Versicherungsangebot() { Anbieter="Wüstenrot", VersicherungsTyp=VersicherungsTyp.Haftpflicht, MonatlichePraemie=99.0m, Deckungssumme=500000 };
         
         management.Create(angebotA);
         management.Create(angebotB);
         management.Create(angebotC);
         management.Create(angebotD);
+        management.Create(angebotE);
+        management.Create(angebotF);
 
         VersicherungsRequestController requestController = new VersicherungsRequestController(management);
         
@@ -49,6 +53,11 @@ public static class Progam {
         bestAngebotResult = requestController.GetAngebot();
         bestAngebot = UnwrapOkObjectResult<Versicherungsangebot, Versicherungsangebot>(bestAngebotResult);
         Console.WriteLine($"Günstigster Anbieter: {bestAngebot.Anbieter} mit einer mon. Prämie: {bestAngebot.MonatlichePraemie} & einer Deckungssumme: {bestAngebot.Deckungssumme}");
+        
+        // Checkt ob das neue Angebot nun das günstigste ist
+        bestAngebotResult = requestController.GetAngebot(VersicherungsTyp.KFZ);
+        bestAngebot = UnwrapOkObjectResult<Versicherungsangebot, Versicherungsangebot>(bestAngebotResult);
+        Console.WriteLine($"Günstigster '{VersicherungsTyp.KFZ}' Anbieter: {bestAngebot.Anbieter} mit einer mon. Prämie: {bestAngebot.MonatlichePraemie} & einer Deckungssumme: {bestAngebot.Deckungssumme}");
     }
     
     //--------------------------------------------------------------------------------
