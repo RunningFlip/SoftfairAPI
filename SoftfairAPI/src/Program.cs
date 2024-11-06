@@ -26,6 +26,9 @@ public static class Progam {
 
         VersicherungsRequestController requestController = new VersicherungsRequestController(management);
         
+        // Hier habe ich nachfolgend ein paar schnelle Tests gefahren um zu schauen, ob letztendlich auch das bei rumkommt,
+        // was ich mir erhofft habe.
+        
         // Alle Angebote
         ActionResult<IEnumerable<Versicherungsangebot>> allAngeboteResult = requestController.GetAngebote();
         Versicherungsangebot[] allAngebote = UnwrapOkObjectResult<Versicherungsangebot[], IEnumerable<Versicherungsangebot>>(allAngeboteResult);
