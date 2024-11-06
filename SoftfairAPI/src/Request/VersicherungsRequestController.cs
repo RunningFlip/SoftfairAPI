@@ -4,24 +4,23 @@
 
 namespace SoftfairAPI; 
 
-/// <summary>
-/// Diese Klasse gibt die Implementierung für Vergleichsrechner Requests an.
-/// Hierrüber finden sich alle Request Methoden, die aktuell noch über eine feste Route verlaufen.
-/// Weitere Implementierungen brauchen entsprechend eine andere Route um gefunden zu werden.
+/// Diese Klasse gibt die Implementierung für Vergleichsrechner-Requests an.
+/// Hierüber finden sich alle Request-Methoden, die aktuell noch über eine feste Route verlaufen.
+/// Weitere Implementierungen brauchen entsprechend eine andere Route, um gefunden zu werden.
 ///
-/// Dieser Punkt war für mich neu, da ich mich bisher noch keine API Schnittstellen gebaut habe,
+/// Dieser Punkt war für mich neu, da ich bisher noch keine API-Schnittstellen gebaut habe,
 /// die GET, PUT, POST & DELETE implementieren.
 /// Hier bin ich mir auch nicht sicher, wie der Aufruf letztendlich in der Klasse landet und wie ich eigentlich
 /// testen kann, ob der Controller via Request das tut, was er soll.
-/// Ich habe mich versucht darüber schlau zu machen, welche ActionResults in welcher Situation am besten wären
+/// Ich habe mich versucht, darüber schlau zu machen, welche ActionResults in welcher Situation am besten wären
 /// und bin mir bewusst, dass es definitiv Edgecases gibt, die man weiter verfolgen kann.
-/// Außerdem kann man, bei Bedarf, die Methoden jeweils Async implementieren und entsprechend den aktuellen Return-Typ
+/// Außerdem kann man, bei Bedarf, die Methoden jeweils async implementieren und entsprechend den aktuellen Return-Typ
 /// mit einem Task wrappen.
 ///
-/// Ich bin hier sehr auf Feedback gespannt und habe Lust neue Aspekte zu erlernen.
+/// Ich bin hier sehr auf Feedback gespannt und habe Lust, neue Aspekte zu erlernen.
 ///
-/// Ich habe mir hierzu bereits Postman engeschaut und verschiedene Test-Frameworks die ggf. gut korrespondieren würden,
-/// habe es bisher aber nicht geschafft, den Controller korrekt anzusprechen. Da ich in meinem Zeitlimit bleiben möchte
+/// Ich habe mir hierzu bereits Postman angeschaut und verschiedene Test-Frameworks, die ggf. gut korrespondieren würden,
+/// habe es bisher aber nicht geschafft, den Controller korrekt anzusprechen. Da ich in meinem Zeitlimit bleiben möchte,
 /// belasse ich es hierbei.
 /// </summary>
 [Route("api/angebote")]
